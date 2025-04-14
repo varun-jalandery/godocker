@@ -2,8 +2,31 @@ options:
   logging: CLOUD_LOGGING_ONLY
   pool: {}
 projectId: godocker-456220
-#europe-west1-docker.pkg.dev/godocker-456220/godocker-repository
+
 steps:
+  - name: 'gcr.io/cloud-builders/git'
+    secretEnv: [ 'SSH_KEY' ]
+    entrypoint: 'bash'
+    args:
+      - -c
+      - |
+        echo "$$SSH_KEY" >> /root/.ssh/id_rsa
+        chmod 400 /root/.ssh/id_rsa
+        cp known_hosts.github /root/.ssh/known_hosts
+    volumes:
+      - name: 'ssh'
+        path: /root/.ssh
+
+  # Clone the repository
+  - name: 'gcr.io/cloud-builders/git'
+    args:
+      - clone
+      - --recurse-submodules
+      - git@github.com:varun-jalandery/godocker.git
+    volumes:
+      - name: 'ssh'
+        path: /root/.ssh
+
   # Build the image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'europe-west1-docker.pkg.dev/godocker-456220/godocker-repository/godocker-image', '.']
@@ -17,5 +40,10 @@ steps:
            '--image', 'europe-west1-docker.pkg.dev/godocker-456220/godocker-repository/godocker-image',
            '--region', 'europe-west1'
     ]
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/325243896748/secrets/github-secret-godocker
+      env: 'SSH_KEY'
 images:
   - 'europe-west1-docker.pkg.dev/godocker-456220/godocker-repository/godocker-image'
