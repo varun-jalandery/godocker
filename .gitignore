@@ -1,0 +1,63 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Directories created by the `go build` command
+/build/
+/bin/
+/dist/
+
+# Vendor dependencies (if not using vendored dependencies)
+vendor/
+
+# Dependency directories (common tools like Glide, Godep, etc.)
+Godeps/
+glide.lock
+
+# Editor and IDE related files
+.idea/
+*.swp
+*.swo
+
+# Logs and debugging
+*.log
+
+# Environment files
+.env
+
+# Compiled dynamically linked libraries (e.g., Linux/macOS)
+*.dll
+*.so
+*.dylib
+
+# Node.js modules (if your Go project uses frontend code as well)
+node_modules/
+
+# Temporary files
+*.tmp
+*.bak
+
+# C/C++ generated cache files (e.g., by cgo)
+*.o
+*.a
+
+# Coverage reports
+coverage.out
+*.cov
+*.prof
+*.gcov
+*.lcov
+
+# Go mod cache (should not normally be committed)
+go.sum
+
+terraform/.terraform
