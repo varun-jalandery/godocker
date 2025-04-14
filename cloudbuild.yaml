@@ -1,0 +1,21 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+  pool: {}
+projectId: godocker-456220
+#europe-west1-docker.pkg.dev/godocker-456220/godocker-repository
+steps:
+  # Build the image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'europe-west1-docker.pkg.dev/godocker-456220/godocker-repository/godocker-image', '.']
+  # Push the image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west1-docker.pkg.dev/godocker-456220/godocker-repository/godocker-image']
+  # Deploy image to Cloud Run
+#  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+#    entrypoint: gcloud
+#    args: ['run', 'deploy', 'hamilius--flask-api-service',
+#           '--image', 'europe-west1-docker.pkg.dev/godocker-456220/godocker-repository/godocker-image',
+#           '--region', 'europe-west1'
+#    ]
+images:
+  - 'europe-west1-docker.pkg.dev/godocker-456220/godocker-repository/godocker-image'
