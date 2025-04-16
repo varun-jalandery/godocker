@@ -23,6 +23,7 @@ steps:
       - clone
       - --recurse-submodules
       - git@github.com:varun-jalandery/godocker.git
+      - /app
     volumes:
       - name: 'ssh'
         path: /root/.ssh
@@ -43,7 +44,7 @@ steps:
 
 availableSecrets:
   secretManager:
-    - versionName: projects/325243896748/secrets/github-secret-godocker
+    - versionName: projects/godocker-456220/secrets/github-secret-godocker/versions/1
       env: 'SSH_KEY'
 images:
   - 'europe-west1-docker.pkg.dev/godocker-456220/godocker-repository/godocker-image'
