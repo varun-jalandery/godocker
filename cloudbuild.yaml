@@ -27,6 +27,8 @@ steps:
     volumes:
       - name: 'ssh'
         path: /root/.ssh
+      - name: 'app'
+        path: /app
 
   # Build the image
   - name: 'gcr.io/cloud-builders/docker'
