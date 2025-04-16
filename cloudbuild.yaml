@@ -4,6 +4,8 @@ options:
 projectId: godocker-456220
 
 steps:
+#  @link https://cloud.google.com/build/docs/access-github-from-build
+#    ssh-keyscan -t rsa github.com > known_hosts.github
   - name: 'gcr.io/cloud-builders/git'
     secretEnv: [ 'SSH_KEY' ]
     entrypoint: 'bash'
@@ -33,6 +35,9 @@ steps:
   # Build the image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'europe-west1-docker.pkg.dev/godocker-456220/godocker-repository/godocker-image', '/app']
+    volumes:
+      - name: 'app'
+        path: /app
   # Push the image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'europe-west1-docker.pkg.dev/godocker-456220/godocker-repository/godocker-image']
