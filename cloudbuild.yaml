@@ -30,7 +30,7 @@ steps:
 
   # Build the image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'europe-west1-docker.pkg.dev/godocker-456220/godocker-repository/godocker-image', '.']
+    args: ['build', '-t', 'europe-west1-docker.pkg.dev/godocker-456220/godocker-repository/godocker-image', '/app']
   # Push the image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'europe-west1-docker.pkg.dev/godocker-456220/godocker-repository/godocker-image']
